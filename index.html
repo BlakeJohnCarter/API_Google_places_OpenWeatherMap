@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="style.css">
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <script>
+
+    function myFunction() {
+
+      navigator.geolocation.getCurrentPosition(initMap, error, options);
+    }
+
+
+
+// This segment of code gathers current geolocation
+// potentially could be using crd.latitude and crd.longitude to input in JSON
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
+
+
+
+    // displays google map
+
+      var map;
+      var infowindow;
+
+      function initMap(pos) {
+        var crd = pos.coords;
+        var current_location = {lat: 0, lng: 0};
+
+        var x = document.getElementById("text_box").value;
+        var array1 = [x];
+
+        var current_search = ['bar'];
+
+
+        var removed = current_search.splice(0, 1, array1);
+
+        console.log(current_search);
+
+
+        var lat_temp = crd.latitude;
+        var Lng_temp = crd.longitude;
+
+        current_location.lat = lat_temp;
+        current_location.lng = Lng_temp;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: current_location,
+          type: current_search,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+
+        service.nearbySearch({
+          location: current_location,
+          radius: 3000,
+          type: current_search
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+    </script>
+
+
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+
+  </head>
+
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">One</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li>
+                          <a href="index.html">Places</a>
+                      </li>
+                      <li>
+                          <a href="weather.html">Weather</a>
+                      </li>
+                      <li>
+                          <a href="#">About</a>
+                      </li>
+                  </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container -->
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h1>Find Activities</h1>
+
+              </div>
+          </div>
+          <!-- /.row -->
+
+      </div>
+      <!-- /.container -->
+
+      <!-- jQuery Version 1.11.1 -->
+      <script src="js/jquery.js"></script>
+
+      <!-- Bootstrap Core JavaScript -->
+      <script src="js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+  <body>
+ <div ng-app="">
+     <p><input type="text"  id = "text_box" ng-model="name" placeholder="Type in gym, restaurants, bars etc.."></p>
+
+     <button class="button button1" onclick="myFunction()">Search for {{name}}</button>
+
+      </div>
+
+    <div id="map"></div>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=INSERT_API_KEY&libraries=places&callback=initMap" async defer></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+html, body {
+  height: 80%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 100%;
+}
+
+.input[type=text] {
+  width: 100%;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  }
+
+  /* When the input field gets focus, change its width to 100% */
+  input[type=text]:focus {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-color: #4CAF50; /* Green */
+  }
+
+  #text_box{
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 90%;
+    margin-left: 20px
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.description, .temp, .place_name {
+  background:#00892E;
+  background:-moz-linear-gradient(top,#00892E 0%,#009933 100%);
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00892E),color-stop(100%,#009933));
+  background:-webkit-linear-gradient(top,#00892E 0%,#009933 100%);
+  background:-o-linear-gradient(top,#00892E 0%,#009933 100%);
+  background:-ms-linear-gradient(top,#00892E 0%,#009933 100%);
+  background:linear-gradient(top,#00892E 0%,#009933 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00892E', endColorstr='#009933',GradientType=0);
+  padding:2px;
+  color:#fff;
+  font-family:'Helvetica Neue',sans-serif;
+  font-size:10px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border:1px solid #459A00;
+  font-size: 35px;
+  text-align: center;
+  margin-top: 5px;
+  box-shadow: 10px 10px 5px #888888;
+
+
+}
+
+#case{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="style.css">
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <script>
+
+    var API_key = "INSERT_API_KEY";
+
+    navigator.geolocation.getCurrentPosition(success, error);
+
+
+    function success(pos) {
+        var crd = pos.coords;
+        getWeather(crd.latitude,crd.longitude);
+    };
+
+    function error(err) {
+        console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
+
+    // call to openweathermap api using lat and long
+    function getWeather(latitude, longitude) {
+        jQuery.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude +
+                        "&units=metric" + '&APPID=' + API_key, function (jsonObj) {
+
+            var list = jsonObj;
+            // console.log(list);
+            // console.log(list.weather[0].main);
+            // console.log(list.weather[0].description);
+            // console.log(list.main.temp);
+            // console.log(list.name);
+
+            description.className = "description";
+            description.classList.add("description");
+            description.setAttribute("class", "description");
+
+            temp.className = "temp";
+            temp.classList.add("temp");
+            temp.setAttribute("class", "temp");
+
+
+
+            place_name.className = "place_name";
+            place_name.classList.add("place_name");
+            place_name.setAttribute("class", "place_name");
+
+            document.getElementById("description").innerHTML = list.weather[0].description;
+            document.getElementById("temp").innerHTML = list.main.temp;
+            document.getElementById("place_name").innerHTML = list.name;
+
+        });
+    }
+
+
+
+    </script>
+
+
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+
+  </head>
+
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="index.html">One</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li>
+                          <a href="index.html">Places</a>
+                      </li>
+                      <li>
+                          <a href="weather.html">Weather</a>
+                      </li>
+                      <li>
+                          <a href="#">About</a>
+                      </li>
+                  </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container -->
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h1>Current Weather conditions</h1>
+
+              </div>
+          </div>
+          <!-- /.row -->
+
+      </div>
+      <!-- /.container -->
+
+      <!-- jQuery Version 1.11.1 -->
+      <script src="js/jquery.js"></script>
+
+      <!-- Bootstrap Core JavaScript -->
+      <script src="js/bootstrap.min.js"></script>
+
+
+<div id = "case">
+      <div id="place_name"></div>
+      <div id="description"></div>
+      <div id="temp"></div>
+  </div>
+
+
+  <body>
+
+
+  </body>
+</html>
